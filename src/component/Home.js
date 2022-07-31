@@ -1,8 +1,11 @@
 import React from 'react'
+import SwipeDrawer from './SwipeDrawer'
 
 const Home = () => {
   return (
-    <div>Home</div>
+   
+        <SwipeDrawer />
+   
   )
 }
 
