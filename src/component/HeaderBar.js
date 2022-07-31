@@ -14,7 +14,7 @@ box-shadow: inset 0 -1px 0 0 #dadce0
 const Heading = styled(Typography)`
 color:#5f6368;
  font-size: 24px;
- margin-left:10px
+ margin-left:25px
  `
 
 const HeaderBar = ({ open, handleDrawer }) => {

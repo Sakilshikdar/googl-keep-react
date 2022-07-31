@@ -2,11 +2,11 @@ import React from 'react'
 import SwipeDrawer from './SwipeDrawer'
 
 const Home = () => {
-  return (
-   
+    return (
+
         <SwipeDrawer />
-   
-  )
+
+    )
 }
 
 export default Home
