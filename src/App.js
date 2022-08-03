@@ -1,12 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
 import Home from './component/Home';
+import DataProvider from './component/context/DataProvider';
 
 function App() {
   return (
-    <div>
+    <DataProvider>
       <Home />
-    </div>
+    </DataProvider>
   );
 }
 

@@ -1,5 +1,6 @@
-import { Box, styled, TextField } from '@mui/material';
-import React from 'react';
+import { Box, ClickAwayListener, styled, TextField } from '@mui/material';
+import React, { useContext, useRef, useState } from 'react';
+import { DataContext } from '../context/DataProvider';
 
 const Container = styled(Box)`
 display: flex;
@@ -9,25 +10,54 @@ padding: 10px 15px;
 border-radius: 8px;
 border-color: #e0e0e0;
 margin: auto;
+min-height: 30px
 `
 
+// const note={
+//     id:'',
+//     heading:'',
+//     text:''
+// }
+
 const From = () => {
+    const [showTextField, setShowTextField] = useState(false);
+
+    const {notes, setNotes} = useContext(DataContext);
+
+    const containerRef = useRef();
+    
+    const onTextAreaClick = () =>{
+        setShowTextField(true);
+        containerRef.current.style.minHeight= '70px';
+    }
+
+    const handleClickAway = () =>{
+        setShowTextField(false);
+        containerRef.current.style.minHeight= '30px';
+    }
+
     return (
-        <Container className='mt-20 lg:w-[600px]'>
-            <TextField 
-            className='mb-3'
-            placeholder='Title'
-            variant='standard'
-            inputProps={{ disableUnderLine: true}}
-            />
+        <ClickAwayListener onClickAway={handleClickAway}>
+        <Container ref={containerRef} className='mt-20 lg:w-[600px]'>
+            {
+                showTextField &&
+                <TextField
+                    className='mb-3'
+                    placeholder='Title'
+                    variant='standard'
+                    inputProps={{ disableunderline: "true" }}
+                />
+            }
             <TextField
-            placeholder='Take a note...'
-            multiline
-            maxRows={Infinity}
-            variant='standard'
-            inputProps={{ disableUnderLine: true}}
+                placeholder='Take a note...'
+                multiline
+                maxRows={Infinity}
+                variant='standard'
+                inputProps={{ disableunderline: "true "}}
+                onClick={onTextAreaClick}
             />
         </Container>
+        </ClickAwayListener>
     );
 };
 
