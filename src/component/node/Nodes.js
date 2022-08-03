@@ -9,7 +9,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 const Nodes = () => {
   return (
-    <Box sx={{display: 'flex'}}>
+    <Box sx={{display: 'flex', width:'100%'}}>
         <Box component='main' sx = {{flexGrow: 1, p:3}}>
             <DrawerHeader />
             <From />
