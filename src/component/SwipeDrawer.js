@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 
+
 import HeaderBar from './HeaderBar';
 import NavList from './NavList';
 
@@ -29,8 +30,8 @@ const closedMixin = (theme) => ({
   },
 });
 
+
 const DrawerHeader = styled('div')(({ theme }) => ({
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
 
