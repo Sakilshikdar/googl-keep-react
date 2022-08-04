@@ -13,7 +13,7 @@ const StyleCard = styled(Card)`
     border-radius: 8px
 `
 
-const Note = ({ note }) => {
+const ArchiveCard = ({ archive, note }) => {
 
     const { notes, setNotes, setArchiveNotes, setDeletedNotes } = useContext(DataContext);
     console.log(notes.id);
@@ -52,4 +52,4 @@ const Note = ({ note }) => {
     )
 }
 
-export default Note
+export default ArchiveCard;
