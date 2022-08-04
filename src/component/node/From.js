@@ -1,6 +1,7 @@
 import { Box, ClickAwayListener, styled, TextField } from '@mui/material';
 import React, { useContext, useRef, useState } from 'react';
 import { DataContext } from '../context/DataProvider';
+import { v4 as uuid } from 'uuid'
 
 const Container = styled(Box)`
 display: flex;
@@ -13,50 +14,67 @@ margin: auto;
 min-height: 30px
 `
 
-// const note={
-//     id:'',
-//     heading:'',
-//     text:''
-// }
+const note = {
+    id: '',
+    heading: '',
+    text: ''
+}
 
 const From = () => {
     const [showTextField, setShowTextField] = useState(false);
+    const [addNote, setAddNote] = useState({ ...note, id: uuid() })
 
-    const {notes, setNotes} = useContext(DataContext);
+    const { setNotes } = useContext(DataContext);
 
     const containerRef = useRef();
-    
-    const onTextAreaClick = () =>{
+
+    const onTextAreaClick = () => {
         setShowTextField(true);
-        containerRef.current.style.minHeight= '70px';
+        containerRef.current.style.minHeight = '70px';
     }
 
-    const handleClickAway = () =>{
+    const handleClickAway = () => {
         setShowTextField(false);
-        containerRef.current.style.minHeight= '30px';
+        containerRef.current.style.minHeight = '30px';
+        setAddNote({ ...note, id: uuid() })
+        if (addNote.heading || addNote.text) {
+            setNotes(prevArr => [addNote, ...prevArr])
+        }
+    }
+
+
+    const onTextChange = (e) => {
+        let changeNotes = { ...addNote, [e.target.name]: e.target.value }
+        setAddNote(changeNotes);
     }
 
     return (
         <ClickAwayListener onClickAway={handleClickAway}>
-        <Container ref={containerRef} className='mt-20 lg:w-[600px]'>
-            {
-                showTextField &&
+            <Container ref={containerRef} className='mt-20 lg:w-[600px]'>
+                {
+                    showTextField &&
+                    <TextField
+                        className='mb-3'
+                        placeholder='Title'
+                        variant='standard'
+                        inputProps={{ disableunderline: "true" }}
+                        onChange={(e => onTextChange(e))}
+                        name='heading'
+                        value={addNote.heading}
+                    />
+                }
                 <TextField
-                    className='mb-3'
-                    placeholder='Title'
+                    placeholder='Take a note...'
+                    multiline
+                    maxRows={Infinity}
                     variant='standard'
-                    inputProps={{ disableunderline: "true" }}
+                    inputProps={{ disableunderline: "true " }}
+                    onClick={onTextAreaClick}
+                    onChange={(e => onTextChange(e))}
+                    name='text'
+                    value={addNote.text}
                 />
-            }
-            <TextField
-                placeholder='Take a note...'
-                multiline
-                maxRows={Infinity}
-                variant='standard'
-                inputProps={{ disableunderline: "true "}}
-                onClick={onTextAreaClick}
-            />
-        </Container>
+            </Container>
         </ClickAwayListener>
     );
 };
