@@ -12,18 +12,6 @@ const Text = styled(Typography)`
     color: #80868b
 `
 
-
-
-
-
-
-
-push
-
-
-
-
-
 const Container = styled(Box)`
     display: flex;
     flex-direction: column;
