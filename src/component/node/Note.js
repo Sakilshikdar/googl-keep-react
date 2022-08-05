@@ -26,7 +26,7 @@ const Note = ({ note }) => {
     const deleteNote = (note) => {
         const updatedNotes = notes.filter(data => data.id !== note.id);
         setNotes(updatedNotes);
-        setArchiveNotes(prevArr => [note, ...prevArr]);
+        setDeletedNotes(prevArr => [note, ...prevArr]);
     }
 
     return (

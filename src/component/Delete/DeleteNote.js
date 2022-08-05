@@ -1,7 +1,7 @@
 import React from 'react'
 import { styled } from '@mui/material/styles';
 import { Card, CardActions, CardContent, Typography } from '@mui/material'
-import { ArchiveOutlined as Archive, DeleteOutlineOutlined as Delete } from '@mui/icons-material';
+import { RestoreFromTrashOutlined as Restore , DeleteForeverOutlined as Delete } from '@mui/icons-material';
 import { useContext, useRef, useState } from 'react';
 import { DataContext } from '../context/DataProvider';
 
@@ -15,19 +15,18 @@ const StyleCard = styled(Card)`
 
 const DeleteNote = ({ note }) => {
 
-    const { notes, setNotes, setArchiveNotes, setDeletedNotes } = useContext(DataContext);
+    const { notes, setNotes, setArchiveNotes, deletedNotes, setDeletedNotes } = useContext(DataContext);
 
-    const archiveNote = (note) => {
-        const updatedNotes = notes.filter(data => data.id !== note.id);
-        setNotes(updatedNotes);
-        setArchiveNotes(prevArr => [note, ...prevArr]);
+    const restoreNote = (note) => {
+        const updatedNotes = deletedNotes.filter(data => data.id !== note.id);
+        setDeletedNotes(updatedNotes);
+        setNotes(prevArr => [note, ...prevArr]);
 
     }
 
     const deleteNote = (note) => {
-        const updatedNotes = notes.filter(data => data.id !== note.id);
-        setNotes(updatedNotes);
-        setArchiveNotes(prevArr => [note, ...prevArr]);
+        const updatedNotes = deletedNotes.filter(data => data.id !== note.id);
+        setDeletedNotes(updatedNotes);
     }
 
     return (
@@ -37,14 +36,14 @@ const DeleteNote = ({ note }) => {
                 <Typography>{note.text}</Typography>
             </CardContent>
             <CardActions>
-                <Archive
-                    fontSize='small'
-                    style={{ marginLeft: 'auto' }}
-                    onClick={() => archiveNote()}
-                />
                 <Delete
                     fontSize='small'
-                    onClick={() => deleteNote()}
+                    onClick={() => deleteNote(note)}
+                    style={{ marginLeft: 'auto' }}
+                />
+                <Restore
+                    fontSize='small'
+                    onClick={() => restoreNote(note)}
                 />
             </CardActions>
         </StyleCard>
