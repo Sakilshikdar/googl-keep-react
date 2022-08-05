@@ -1,7 +1,7 @@
 import React from 'react'
 import { styled } from '@mui/material/styles';
 import { Card, CardActions, CardContent, Typography } from '@mui/material'
-import { ArchiveOutlined as Archive, DeleteOutlineOutlined as Delete } from '@mui/icons-material';
+import { UnarchiveOutlined as Unarchive, DeleteOutlineOutlined as Delete } from '@mui/icons-material';
 import { useContext, useRef, useState } from 'react';
 import { DataContext } from '../context/DataProvider';
 
@@ -13,7 +13,7 @@ const StyleCard = styled(Card)`
     border-radius: 8px
 `
 
-const ArchiveCard = ({ archive, note }) => {
+const Archive = ({ archive, note }) => {
 
     const { notes, setNotes, setArchiveNotes, setDeletedNotes } = useContext(DataContext);
     console.log(notes.id);
@@ -52,4 +52,4 @@ const ArchiveCard = ({ archive, note }) => {
     )
 }
 
-export default ArchiveCard;
+export default Archive;

@@ -10,7 +10,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins?.toolbar
 }));
 
-const Nodes = () => {
+const Notes = () => {
   const { notes } = useContext(DataContext)
   return (
     <Box sx={{ display: 'flex', width: '100%' }}>
@@ -34,4 +34,4 @@ const Nodes = () => {
   )
 }
 
-export default Nodes;
+export default Notes;

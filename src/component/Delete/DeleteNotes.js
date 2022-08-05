@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Box, Grid } from '@mui/material';
 import React, { useContext } from 'react';
 import { DataContext } from '../context/DataProvider';
-import From from './From';
+import From from '../node/From';
 import DeleteNote from './DeleteNote';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -15,7 +15,6 @@ const DeleteNotes = () => {
     <Box sx={{ display: 'flex', width: '100%' }}>
       <Box sx={{ p: 3, width: '100%;' }}>
         <DrawerHeader />
-        <From />
           <Grid container>
             {
               deletedNotes.map(note =>
