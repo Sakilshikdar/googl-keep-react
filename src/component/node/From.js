@@ -50,7 +50,7 @@ const From = () => {
 
     return (
         <ClickAwayListener onClickAway={handleClickAway}>
-            <Container ref={containerRef} className='mt-20 lg:w-[600px]'>
+            <Container ref={containerRef} className='lg:w-[600px] mt-20'>
                 {
                     showTextField &&
                     <TextField

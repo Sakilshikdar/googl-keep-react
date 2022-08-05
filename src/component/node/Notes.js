@@ -18,7 +18,7 @@ const Notes = () => {
         <DrawerHeader />
         <From />
         {notes.length > 0 ?
-          <Grid container>
+          <Grid container className='mt-20'>
             {
               notes.map(note =>
                 <Grid item>
