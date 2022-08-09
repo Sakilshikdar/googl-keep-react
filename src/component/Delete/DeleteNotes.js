@@ -1,31 +1,28 @@
-import styled from '@emotion/styled';
-import { Box, Grid } from '@mui/material';
 import React, { useContext } from 'react';
 import { DataContext } from '../context/DataProvider';
-import From from '../node/From';
+import { NoteHeader } from '../NoteHeader/NoteHeader';
 import DeleteNote from './DeleteNote';
-
-const DrawerHeader = styled('div')(({ theme }) => ({
-  ...theme.mixins?.toolbar
-}));
 
 const DeleteNotes = () => {
   const { deletedNotes } = useContext(DataContext)
+  
   return (
-    <Box sx={{ display: 'flex', width: '100%' }}>
-      <Box sx={{ p: 3, width: '100%;' }}>
-        <DrawerHeader />
-          <Grid container className='mt-16'>
+    <div className='w-[75%]'>
+      <NoteHeader />
+    <div className=''>
+      <div className='lg:pl-44 w-12/12'>
+        <div container="true" className='grid lg:grid-cols-4 grid-cols-1 md:grid-cols-2 gap-x-7'>
             {
               deletedNotes.map(note =>
-                <Grid item>
+                <div item>
                   <DeleteNote note={note} />
-                </Grid>
+                </div>
               )
             }
-          </Grid>
-      </Box>
-    </Box>
+          </div>
+      </div>
+    </div>
+    </div>
   )
 }
 

@@ -1,19 +1,19 @@
 import React from 'react'
-import { styled } from '@mui/material/styles';
-import { Card, CardActions, CardContent, Typography } from '@mui/material'
-import { RestoreFromTrashOutlined as Restore , DeleteForeverOutlined as Delete } from '@mui/icons-material';
-import { useContext, useRef, useState } from 'react';
+import { MdOutlineRestoreFromTrash as Restore,MdDeleteOutline as Delete } from 'react-icons/md';
+import { useContext } from 'react';
 import { DataContext } from '../context/DataProvider';
 
-const StyleCard = styled(Card)`
-    width: 240px;
-    margin: 8px;
-    box-shadow: none;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px
-`
+// const StyleCard = styled(Card)`
+//     width: 240px;
+//     margin: 8px;
+//     box-shadow: none;
+//     border: 1px solid #e0e0e0;
+//     border-radius: 8px
+// `
 
 const DeleteNote = ({ note }) => {
+
+    
 
     const { notes, setNotes, setArchiveNotes, deletedNotes, setDeletedNotes } = useContext(DataContext);
 
@@ -30,23 +30,23 @@ const DeleteNote = ({ note }) => {
     }
 
     return (
-        <StyleCard>
-            <CardContent>
-                <Typography>{note.heading}</Typography>
-                <Typography>{note.text}</Typography>
-            </CardContent>
-            <CardActions>
+        <div className='styledCard'>
+            <div className="px-3">
+                <h2>{note.heading}</h2>
+                <p>{note.text}</p>
+            </div>
+            <div className='justify-end flex mb-2 mr-2'>
                 <Delete
-                    fontSize='small'
+                    fontSize='20px'
                     onClick={() => deleteNote(note)}
                     style={{ marginLeft: 'auto' }}
                 />
                 <Restore
-                    fontSize='small'
+                    fontSize='20px'
                     onClick={() => restoreNote(note)}
                 />
-            </CardActions>
-        </StyleCard>
+            </div>
+        </div>
     )
 }
 

@@ -1,17 +1,16 @@
 import { useContext } from 'react';
-
-import { Card, CardContent, CardActions, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { UnarchiveOutlined as Unarchive, DeleteOutlineOutlined as Delete } from '@mui/icons-material';
+import { MdOutlineUnarchive as Unarchive, MdDeleteOutline as Delete  } from 'react-icons/md'
 import { DataContext } from '../context/DataProvider';
+import { NoteHeader } from '../NoteHeader/NoteHeader';
+import './Archive.css'
 
-const StyledCard = styled(Card)`
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    width: 240px;
-    margin: 8px;
-    box-shadow: none;
-`
+// const StyledCard = styled(Card)`
+//     border: 1px solid #e0e0e0;
+//     border-radius: 8px;
+//     width: 240px;
+//     margin: 8px;
+//     box-shadow: none;
+// `
 
 const Archive = ({ archive }) => {
 
@@ -30,23 +29,25 @@ const Archive = ({ archive }) => {
     }
 
     return (
-        <StyledCard>
-            <CardContent>
-                <Typography>{archive.heading}</Typography>
-                <Typography>{archive.text}</Typography>
-            </CardContent>
-            <CardActions>
+        <div className='w-[75%]'>
+        <div className='styledCard'>
+             <div className="px-3">
+                <h2>{archive.heading}</h2>
+                <p>{archive.text}</p>
+                </div>
+                <div className='justify-end flex mb-2 mr-2'>
                 <Unarchive
-                    fontSize="small"
-                    style={{ marginLeft: 'auto' }}
+                    fontSize="20px"
+                    style={{ marginRight: '10px' }}
                     onClick={() => unArchiveNote(archive)}
                 />
                 <Delete
-                    fontSize="small"
+                    fontSize="20px"
                     onClick={() => deleteNote(archive)}
                 />
-            </CardActions>
-        </StyledCard>
+            </div>
+        </div>
+        </div>
     )
 }
 

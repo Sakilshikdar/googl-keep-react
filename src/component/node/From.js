@@ -1,18 +1,19 @@
-import { Box, ClickAwayListener, styled, TextField } from '@mui/material';
 import React, { useContext, useRef, useState } from 'react';
 import { DataContext } from '../context/DataProvider';
 import { v4 as uuid } from 'uuid'
+import ClickAwayListener from 'react-click-away-listener';
+import './From.css'
 
-const Container = styled(Box)`
-display: flex;
-flex-direction: column;
-box-shadow: 0 1px 2px 0 rgb(60 64 67/ 30%), 0 2px 6px 2px rgb(60 64 67/ 15%); 
-padding: 10px 15px;
-border-radius: 8px;
-border-color: #e0e0e0;
-margin: auto;
-min-height: 30px
-`
+// const Container = styled()`
+// display: flex;
+// flex-direction: column;
+// box-shadow: 0 1px 2px 0 rgb(60 64 67/ 30%), 0 2px 6px 2px rgb(60 64 67/ 15%); 
+// padding: 10px 15px;
+// border-radius: 8px;
+// border-color: #e0e0e0;
+// margin: auto;
+// min-height: 30px
+// `
 
 const note = {
     id: '',
@@ -49,33 +50,32 @@ const From = () => {
     }
 
     return (
-        <ClickAwayListener onClickAway={handleClickAway}>
-            <Container ref={containerRef} className='lg:w-[600px] mt-20'>
-                {
-                    showTextField &&
-                    <TextField
-                        className='mb-3'
-                        placeholder='Title'
+        <div className="lg:ml-96">
+            <ClickAwayListener onClickAway={handleClickAway}>
+                <div ref={containerRef} className='container lg:w-[600px] w-10/12 mt-5'>
+                    {
+                        showTextField &&
+                        <input
+                            className='mb-3 border-none'
+                            placeholder='Title'
+                            variant='standard' 
+                            onChange={(e => onTextChange(e))}
+                            name='heading'
+                            value={addNote.heading}
+                        />
+                    }
+                    <textarea
+                        className='border-none mb-3 hover:border-none'
+                        placeholder='Take a note...'
                         variant='standard'
-                        inputProps={{ disableunderline: "true" }}
+                        onClick={onTextAreaClick}
                         onChange={(e => onTextChange(e))}
-                        name='heading'
-                        value={addNote.heading}
-                    />
-                }
-                <TextField
-                    placeholder='Take a note...'
-                    multiline
-                    maxRows={Infinity}
-                    variant='standard'
-                    inputProps={{ disableunderline: "true " }}
-                    onClick={onTextAreaClick}
-                    onChange={(e => onTextChange(e))}
-                    name='text'
-                    value={addNote.text}
-                />
-            </Container>
-        </ClickAwayListener>
+                        name='text'
+                        value={addNote.text}
+                    ></textarea>
+                </div>
+            </ClickAwayListener>
+        </div>
     );
 };
 

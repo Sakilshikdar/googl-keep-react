@@ -1,21 +1,16 @@
-import React from 'react'
-import { styled } from '@mui/material/styles';
-import { Card, CardActions, CardContent, Typography } from '@mui/material'
-import { ArchiveOutlined as Archive, DeleteOutlineOutlined as Delete } from '@mui/icons-material';
-import { useContext, useRef, useState } from 'react';
+import React, { useState } from 'react'
+import { MdDeleteOutline as Delete } from 'react-icons/md'
+import { BiArchiveIn as Archive } from "react-icons/bi";
+import { IoColorPaletteOutline as Color } from "react-icons/io5"
+import { useContext } from 'react';
 import { DataContext } from '../context/DataProvider';
-
-const StyleCard = styled(Card)`
-    width: 240px;
-    margin: 8px;
-    box-shadow: none;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px
-`
+import './Note.css'
+import CardColor from './CardColor/CardColor';
 
 const Note = ({ note }) => {
 
     const { notes, setNotes, setArchiveNotes, setDeletedNotes } = useContext(DataContext);
+    const [show, setShow] = useState(false)
 
     const archiveNote = (note) => {
         const updatedNotes = notes.filter(data => data.id !== note.id);
@@ -29,24 +24,38 @@ const Note = ({ note }) => {
         setDeletedNotes(prevArr => [note, ...prevArr]);
     }
 
+    
+
     return (
-        <StyleCard>
-            <CardContent>
-                <Typography>{note.heading}</Typography>
-                <Typography>{note.text}</Typography>
-            </CardContent>
-            <CardActions>
-                <Archive
-                    fontSize='small'
-                    style={{ marginLeft: 'auto' }}
-                    onClick={() => archiveNote(note)}
-                />
-                <Delete
-                    fontSize='small'
-                    onClick={() => deleteNote(note)}
-                />
-            </CardActions>
-        </StyleCard>
+        <div>
+            <div className='StyleCard'>
+                <div className="p-3">
+                    <h2>{note.heading}</h2>
+                    <p>{note.text}</p>
+                </div>
+                <div className='justify-end flex mb-2 mr-2'>
+                    <Color
+                        fontSize='20px'
+                        style={{ marginRight: '10px' }}
+                        onClick={() =>setShow(!show)}
+                    />
+                    <Archive
+                        fontSize='20px'
+                        style={{ marginRight: '10px' }}
+                        onClick={() => archiveNote(note)}
+                    />
+                    <Delete
+                        fontSize='20px'
+                        onClick={() => deleteNote(note)}
+                    />
+                </div>
+            </div>
+            <div className='ml-4'>
+                {
+                    show ? <CardColor /> : null
+                }
+            </div>
+        </div>
     )
 }
 
